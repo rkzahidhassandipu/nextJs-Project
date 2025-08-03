@@ -1,11 +1,11 @@
 import Navbar from "@/components/Navbar";
 import ServiceSection from "@/components/serviceSection/serviceSection";
-import Image from "next/image";
+import Slider from "@/components/Slider/Slider";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
+      <Slider />
       <ServiceSection />
     </>
   );
