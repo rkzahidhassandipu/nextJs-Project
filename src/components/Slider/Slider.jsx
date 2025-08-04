@@ -5,7 +5,14 @@ import Slider from "./SliderClient";
 
 export default async function HomePage() {
   const bannerData = await dbConnect(collectionNamesOb.bannerCollection);
-  const banners = await bannerData.find({}).toArray();
+  const bannersRaw = await bannerData.find({}).toArray();
+
+  const banners = bannersRaw.map((banner) => ({
+    _id: banner._id.toString(), // convert ObjectId to string
+    title: banner.title,
+    subTitle: banner.subTitle,
+    img: banner.img,
+  }));
 
   return (
     <main>
