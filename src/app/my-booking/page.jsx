@@ -1,6 +1,6 @@
-'use client'
-import MyBookingTable from '@/components/myBookingTable/MyBookingTable';
-import React, { useEffect, useState } from 'react';
+"use client";
+import MyBookingTable from "@/components/myBookingTable/MyBookingTable";
+import React, { useEffect, useState } from "react";
 
 const Page = () => {
   const [data, setData] = useState([]);
@@ -8,7 +8,9 @@ const Page = () => {
   useEffect(() => {
     const fetchMyBooking = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/service');
+        const res = await fetch("http://localhost:3000/api/service", {
+          cache: "no-store",
+        });
         const d = await res.json();
         setData(d);
       } catch (error) {

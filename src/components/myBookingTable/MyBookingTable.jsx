@@ -1,3 +1,5 @@
+import DeleteBooking from "./DeleteBooking";
+
 const MyBookingTable = ({ data }) => {
   return (
     <div className="overflow-x-auto">
@@ -12,6 +14,7 @@ const MyBookingTable = ({ data }) => {
             <th>Email</th>
             <th>Phone</th>
             <th>Address</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -25,6 +28,9 @@ const MyBookingTable = ({ data }) => {
               <td>{item.email}</td>
               <td>{item.phone}</td>
               <td>{item.address}</td>
+              <td>
+                <DeleteBooking id={item._id} />
+              </td>
             </tr>
           ))}
         </tbody>
