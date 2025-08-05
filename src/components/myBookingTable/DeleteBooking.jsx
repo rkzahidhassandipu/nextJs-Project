@@ -1,15 +1,16 @@
 import { FaTrash } from "react-icons/fa";
 
-const DeleteBooking = ({ id }) => {
+const DeleteBooking = ({ id, onDelete }) => {
   const handleDelete = async (id) => {
-    // if (!confirm) return;
-
     try {
       const res = await fetch(`http://localhost:3000/api/service/${id}`, {
         method: "DELETE",
       });
 
-      const data = await res.json()
+      const data = await res.json();
+      if (data?.deletedCount > 0) {
+        onDelete(id); // ✅ Remove from local state
+      }
     } catch (err) {
       console.error("Delete failed:", err);
     }

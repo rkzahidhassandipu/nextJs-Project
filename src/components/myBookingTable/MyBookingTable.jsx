@@ -1,6 +1,6 @@
 import DeleteBooking from "./DeleteBooking";
 
-const MyBookingTable = ({ data }) => {
+const MyBookingTable = ({ data, onDelete }) => {
   return (
     <div className="overflow-x-auto">
       <table className="table w-11/12 mx-auto my-5 border border-gray-300">
@@ -29,7 +29,7 @@ const MyBookingTable = ({ data }) => {
               <td>{item.phone}</td>
               <td>{item.address}</td>
               <td>
-                <DeleteBooking id={item._id} />
+                <DeleteBooking id={item._id}  onDelete={onDelete} />
               </td>
             </tr>
           ))}

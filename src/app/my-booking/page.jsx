@@ -18,12 +18,17 @@ const Page = () => {
       }
     };
 
-    fetchMyBooking(); // ✅ CALL THE FUNCTION
+    fetchMyBooking();
   }, []);
+
+  // Function to remove deleted item from state
+  const handleDeleteLocal = (id) => {
+    setData((prev) => prev.filter((item) => item._id !== id));
+  };
 
   return (
     <div>
-      <MyBookingTable data={data} />
+      <MyBookingTable data={data} onDelete={handleDeleteLocal} />
     </div>
   );
 };
