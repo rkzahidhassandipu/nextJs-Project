@@ -13,10 +13,7 @@ const CheckoutFormUpdate = ({ data }) => {
   const onSubmit = async (bookData) => {
   const completeData = {
     ...bookData,
-    title: data?.title,
-    service_id: data?.service_id,
-    service_db_id: data?._id,
-    createdAt: new Date(),
+    Updated: new Date(),
   };
 
   const res = await fetch('http://localhost:3000/api/service', {
