@@ -1,4 +1,6 @@
+import Link from "next/link";
 import DeleteBooking from "./DeleteBooking";
+import { FaEdit } from "react-icons/fa";
 
 const MyBookingTable = ({ data, onDelete }) => {
   return (
@@ -28,6 +30,11 @@ const MyBookingTable = ({ data, onDelete }) => {
               <td>{item.email}</td>
               <td>{item.phone}</td>
               <td>{item.address}</td>
+              <td>
+               <Link href={`my-booking/${item._id}`}>
+                <FaEdit />
+               </Link>
+              </td>
               <td>
                 <DeleteBooking id={item._id}  onDelete={onDelete} />
               </td>

@@ -73,20 +73,33 @@ const Navbar = ({}) => {
         </div>
         <div className="navbar-end">
           {status === "authenticated" ? (
-        <>
-        <li className="list-none"><Image src={session?.user?.image} width={50} height={50} alt="user logo" className=" rounded-full mr-5" /></li>
-          <li className="font-medium list-none px-5 py-2 rounded mr-2 cursor-pointer bg-orange-600 text-white" onClick={() => signOut()}>Log Out</li>
-        </>
-      ) : (
-        <>
-          <li className="font-medium list-none px-5 py-3 px-5 py-2 rounded mr-2 cursor-pointer bg-orange-600 text-white">
-            <Link href="/login">Login</Link>
-          </li>
-          <li className="font-medium list-none px-5 py-3 px-5 py-2 rounded mr-2 cursor-pointer bg-gray-300 text-black">
-            <Link href="/register">Register</Link>
-          </li>
-        </>
-      )}
+            <>
+              <li className="list-none">
+                <Image
+                  src={session?.user?.image || "/default-avatar.png"}
+                  width={50}
+                  height={50}
+                  alt="user logo"
+                  className="rounded-full mr-5"
+                />
+              </li>
+              <li
+                className="font-medium list-none px-5 py-2 rounded mr-2 cursor-pointer bg-orange-600 text-white"
+                onClick={() => signOut()}
+              >
+                Log Out
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="font-medium list-none px-5 py-3 px-5 py-2 rounded mr-2 cursor-pointer bg-orange-600 text-white">
+                <Link href="/login">Login</Link>
+              </li>
+              <li className="font-medium list-none px-5 py-3 px-5 py-2 rounded mr-2 cursor-pointer bg-gray-300 text-black">
+                <Link href="/register">Register</Link>
+              </li>
+            </>
+          )}
 
           <a className="btn rounded-sm">Appointment</a>
         </div>
