@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 
 const CheckoutFormUpdate = ({ data }) => {
+  console.log('product data', data)
   const { data: session } = useSession();
   const {
     register,
@@ -103,8 +104,8 @@ const CheckoutFormUpdate = ({ data }) => {
           <input
             {...register("amount")}
             type="text"
-            readOnly
-            defaultValue={data?.price}
+            
+            defaultValue={data?.amount}
             className="border py-2 px-1 rounded-md w-full bg-gray-100 text-gray-700"
           />
         </div>
@@ -122,6 +123,7 @@ const CheckoutFormUpdate = ({ data }) => {
                 message: "Invalid phone number",
               },
             })}
+            defaultValue={data?.phone}
             type="tel"
             placeholder="e.g., 0123456789"
             className="border py-2 px-1 rounded-md w-full"
@@ -141,6 +143,7 @@ const CheckoutFormUpdate = ({ data }) => {
             type="text"
             placeholder="Your current address"
             className="border py-2 px-1 rounded-md w-full"
+            defaultValue={data?.address}
           />
           {errors.address && (
             <p className="text-red-500 text-sm mt-1">
