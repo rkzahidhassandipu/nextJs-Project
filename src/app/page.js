@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <>
       <Slider />
-      <ServiceSection />
       <AboutUs />
+      <ServiceSection />
     </>
   );
 }

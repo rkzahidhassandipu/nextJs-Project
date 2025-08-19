@@ -3,24 +3,24 @@ import Image from "next/image";
 
 const AboutUs = () => {
   return (
-    <section className="bg-white py-12 px-6 md:px-16">
+    <section className="bg-white py-12 px-6 md:px-16 pt-20 pb-32">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
         
         {/* Left Side - Images */}
         <div className="relative">
           <Image
-            src="https://i.postimg.cc/3JCSmW8n/mechanic.jpg"
+            src="https://i.postimg.cc/Jnrd9RYr/Rectangle-4.png"
             alt="Mechanic"
             width={500}
             height={500}
             className="rounded-lg shadow-md"
           />
           <Image
-            src="https://i.postimg.cc/3RgnHzZ0/oil.jpg"
+            src="https://i.postimg.cc/tgtMSs5v/Rectangle-5.png"
             alt="Car Tools"
             width={220}
             height={220}
-            className="absolute bottom-[-30px] left-[40px] rounded-lg shadow-lg border-4 border-white"
+            className="absolute bottom-[-30px] left-[250px] rounded-lg shadow-lg border-4 border-white"
           />
         </div>
 
