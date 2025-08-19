@@ -1,10 +1,12 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const CheckoutFormUpdate = ({ data }) => {
-  console.log('product data', data)
   const { data: session } = useSession();
+  const [status, setStatus] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -12,20 +14,35 @@ const CheckoutFormUpdate = ({ data }) => {
   } = useForm();
 
   const onSubmit = async (bookData) => {
-  const completeData = {
-    ...bookData,
-    Updated: new Date(),
+    setStatus("loading");
+
+    const completeData = {
+      ...bookData,
+      Updated: new Date(),
+    };
+
+    try {
+      const res = await fetch(`http://localhost:3000/api/my-bookings/${data._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(completeData),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Request failed with status ${res.status}`);
+      }
+
+      const postedResponse = await res.json();
+      console.log("Update response:", postedResponse);
+
+      setStatus("success");
+    } catch (err) {
+      console.error("Update error:", err);
+      setStatus("error");
+    }
   };
-
-  const res = await fetch('http://localhost:3000/api/service', {
-    method: "POST",
-    body: JSON.stringify(completeData)
-  })
-
-  const postedResponsive = await res.json();
-  console.log(postedResponsive)
-};
-
 
   return (
     <form
@@ -33,7 +50,7 @@ const CheckoutFormUpdate = ({ data }) => {
       className="max-w-2xl mx-auto bg-white shadow-lg p-6 rounded-lg space-y-4 my-10"
     >
       <h2 className="text-2xl font-bold text-center mb-6">
-        Book Service: {data?.title}
+        Book Service: {data?.title } {data._id}
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -45,7 +62,6 @@ const CheckoutFormUpdate = ({ data }) => {
           <input
             {...register("name", { required: "Name is required" })}
             type="text"
-            placeholder="Enter your full name"
             defaultValue={session?.user?.name}
             readOnly
             className="border py-2 px-1 rounded-md w-full"
@@ -70,7 +86,6 @@ const CheckoutFormUpdate = ({ data }) => {
             })}
             defaultValue={session?.user?.email}
             type="email"
-            placeholder="Enter your email"
             readOnly
             className="border py-2 px-1 rounded-md w-full"
           />
@@ -88,7 +103,7 @@ const CheckoutFormUpdate = ({ data }) => {
             {...register("date", { required: "Date is required" })}
             type="date"
             readOnly
-            defaultValue={new Date().toISOString().split('T')[0]}
+            defaultValue={new Date().toISOString().split("T")[0]}
             className="border py-2 px-1 rounded-md w-full"
           />
           {errors.date && (
@@ -96,7 +111,7 @@ const CheckoutFormUpdate = ({ data }) => {
           )}
         </div>
 
-        {/* Due Amount */}
+        {/* Amount */}
         <div>
           <label className="block mb-1 text-sm font-medium text-gray-700">
             Due Amount
@@ -104,7 +119,6 @@ const CheckoutFormUpdate = ({ data }) => {
           <input
             {...register("amount")}
             type="text"
-            
             defaultValue={data?.amount}
             className="border py-2 px-1 rounded-md w-full bg-gray-100 text-gray-700"
           />
@@ -141,9 +155,9 @@ const CheckoutFormUpdate = ({ data }) => {
           <input
             {...register("address", { required: "Address is required" })}
             type="text"
+            defaultValue={data?.address}
             placeholder="Your current address"
             className="border py-2 px-1 rounded-md w-full"
-            defaultValue={data?.address}
           />
           {errors.address && (
             <p className="text-red-500 text-sm mt-1">
@@ -153,13 +167,24 @@ const CheckoutFormUpdate = ({ data }) => {
         </div>
       </div>
 
-      {/* Submit Button */}
       <button
         type="submit"
-        className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded w-full mt-6 font-medium"
+        disabled={status === "loading"}
+        className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded w-full mt-6 font-medium disabled:opacity-50"
       >
-        Submit Checkout
+        {status === "loading" ? "Updating..." : "Submit Checkout"}
       </button>
+
+      {status === "success" && (
+        <p className="text-green-600 text-center mt-4">
+          Booking updated successfully!
+        </p>
+      )}
+      {status === "error" && (
+        <p className="text-red-600 text-center mt-4">
+          Something went wrong. Please try again.
+        </p>
+      )}
     </form>
   );
 };
