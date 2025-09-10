@@ -1,9 +1,9 @@
 // app/page.jsx or wherever you're using it
 
 import dbConnect, { collectionNamesOb } from "@/lib/dbConnect";
-import Slider from "./SliderClient";
+import SliderClient from "./SliderClient";
 
-export default async function HomePage() {
+export default async function Slider() {
   const bannerData = await dbConnect(collectionNamesOb.bannerCollection);
   const bannersRaw = await bannerData.find({}).toArray();
 
@@ -16,7 +16,7 @@ export default async function HomePage() {
 
   return (
     <main>
-      <Slider banners={banners} />
+      <SliderClient banners={banners} />
     </main>
   );
 }

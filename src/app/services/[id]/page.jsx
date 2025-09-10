@@ -24,49 +24,64 @@ const Page = async ({ params }) => {
 
         {/* Content on top */}
       </div>
-      <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden p-6 mt-10">
-        {/* Image */}
-        <div className="w-full h-64 relative mb-6">
-          <Image
-            src={data?.img}
-            alt={data?.title}
-            layout="fill"
-            objectFit="cover"
-            className="rounded-md"
-          />
-        </div>
-
-        {/* Title and Price */}
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-3xl font-bold text-gray-800">{data?.title}</h2>
-          <span className="text-xl font-semibold text-indigo-600">
-            ${data?.price}
-          </span>
-        </div>
-
-        {/* Description */}
-        <p className="text-gray-600 mb-6">{data?.description}</p>
-
-        {/* Facilities */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {data?.facility.map((item, index) => (
-            <div key={index} className="bg-gray-100 p-4 rounded-lg">
-              <h4 className="text-lg font-semibold text-gray-700 mb-2">
-                {item.name}
-              </h4>
-              <p className="text-gray-600 text-sm">{item.details}</p>
+      <div className="grid grid-cols-6">
+        <div className="col-span-4">
+          <div className="mx-auto bg-white fvhrounded-lg overflow-hidden mt-10">
+            {/* Image */}
+            <div className="w-full h-64 relative mb-6">
+              <Image
+                src={data?.img}
+                alt={data?.title}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-md"
+              />
             </div>
-          ))}
-        </div>
 
-        {/* Checkout Button */}
-        <div className="mt-8 text-right">
-          <Link href={`/checkout/${data._id}`}>
-            <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-6 py-2 rounded-lg transition duration-300">
-              Checkout
-            </button>
-          </Link>
+            {/* Title and Price */}
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-3xl font-bold text-gray-800">
+                {data?.title}
+              </h2>
+              <span className="text-xl font-semibold text-indigo-600">
+                ${data?.price}
+              </span>
+            </div>
+
+            {/* Description */}
+            <p className="text-gray-600 mb-6">{data?.description}</p>
+
+            {/* Facilities */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-8">
+              {data?.facility.map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-100 p-4 rounded-lg border-t border-orange-500"
+                >
+                  <h4 className="text-lg font-semibold text-gray-700 mb-2">
+                    {item.name}
+                  </h4>
+                  <p className="text-gray-600 text-sm">{item.details}</p>
+                </div>
+              ))}
+            </div>
+            <div>
+              <p className="text-gray-600 mb-6">{data?.description}</p>
+              <h2 className="font-bold text-2xl my-5">3 Simple Steps to Process</h2>
+              {/* Description */}
+              <p className="text-gray-600 mb-6">{data?.description}</p>
+            </div>
+            {/* Checkout Button */}
+            <div className="mt-8 text-right">
+              <Link href={`/checkout/${data._id}`}>
+                <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-6 py-2 rounded-lg transition duration-300">
+                  Checkout
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
+        <div className="col-span-2">k</div>
       </div>
     </div>
   );

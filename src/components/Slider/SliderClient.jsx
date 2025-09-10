@@ -3,24 +3,42 @@
 import { useState, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-const Slider = ({ banners }) => {
+const SliderClient = ({ banners }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  // Auto-slide every 5 seconds (optional)
+  // Wait for images to load
   useEffect(() => {
+    const imgPromises = banners.map(
+      (banner) =>
+        new Promise((resolve) => {
+          const img = new Image();
+          img.src = banner.img;
+          img.onload = resolve;
+          img.onerror = resolve;
+        })
+    );
+    Promise.all(imgPromises).then(() => setLoading(false));
+  }, [banners]);
+
+  // Auto-slide every 5 seconds
+  useEffect(() => {
+    if (loading) return; // don't slide while loading
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
+      setCurrentIndex((prev) =>
+        prev === banners.length - 1 ? 0 : prev + 1
+      );
     }, 5000);
     return () => clearInterval(interval);
-  }, [banners.length]);
+  }, [banners.length, loading]);
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? banners.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
-  };
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-[300px] sm:h-[400px] md:h-[500px]">
+        <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-11/12 mx-auto my-10 h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden rounded-lg">
@@ -41,8 +59,8 @@ const Slider = ({ banners }) => {
                 <h1 className="text-4xl font-bold mb-3">{banner.title}</h1>
                 <p>{banner.subTitle}</p>
                 <div className="mt-4 flex gap-4 justify-center">
-                    <button className="py-3 px-6 bg-orange-600 font-bold rounded">Discover More</button>
-                    <button className="py-3 px-6 rounded border border-orange-600">Latest Project</button>
+                  <button className="py-3 px-6 bg-orange-600 font-bold rounded">Discover More</button>
+                  <button className="py-3 px-6 rounded border border-orange-600">Latest Project</button>
                 </div>
               </div>
             </div>
@@ -69,4 +87,4 @@ const Slider = ({ banners }) => {
   );
 };
 
-export default Slider;
+export default SliderClient;

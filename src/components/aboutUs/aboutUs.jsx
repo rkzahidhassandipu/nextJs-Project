@@ -4,7 +4,7 @@ import Image from "next/image";
 const AboutUs = () => {
   return (
     <section className="bg-white py-12 px-6 md:px-16 pt-20 pb-32">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+      <div className="w-11/12 mx-auto grid md:grid-cols-2 gap-8 items-center">
         
         {/* Left Side - Images */}
         <div className="relative">
@@ -26,7 +26,7 @@ const AboutUs = () => {
 
         {/* Right Side - Content */}
         <div>
-          <h4 className="text-red-500 font-semibold mb-2">About Us</h4>
+          <h4 className="text-orange-600 font-semibold mb-2">About Us</h4>
           <h2 className="text-3xl font-bold mb-4 leading-snug">
             We are qualified <br /> &amp; of experience in this field
           </h2>
@@ -39,7 +39,7 @@ const AboutUs = () => {
             The majority have suffered alteration in some form, by injected
             humour, or randomised words which don’t look even slightly believable.
           </p>
-          <button className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-md font-medium shadow-md transition">
+          <button className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-md font-medium shadow-md transition">
             Get More Info
           </button>
         </div>

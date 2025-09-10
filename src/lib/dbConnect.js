@@ -7,6 +7,9 @@ export const collectionNamesOb = {
   bannerCollection: "Banner",
   usersCollection: "users",
   bookingCollection: "booking",
+  TestimonialCollection: "Testimonial",
+  ourTeamCollection: "OurTeam",
+  productsCollection: "products",
 }
 
 const dbConnect = (collectionName) => {

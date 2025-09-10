@@ -8,12 +8,16 @@ const ServiceSection = async ({}) => {
   const data = await serviceCollection.find({}).toArray();
 
   return (
-    <div className=" mx-auto lg:w-11/12">
+    <div className="mx-auto lg:w-11/12">
       <div className="text-center mb-8">
-        <p className="text-red-500 font-semibold mb-2 mb-6">About Us</p>
+        <p className="text-orange-600 font-semibold mb-2 mb-6">About Us</p>
         <h2 className="text-4xl font-bold mb-6">Our Service Area</h2>
-        <p className="text-gray-400 leading-6">the majority have suffered alteration in some form, by injected humour, or randomised <br /> words which don't look even slightly believable. </p>
+        <p className="text-gray-400 leading-6">
+          the majority have suffered alteration in some form, by injected humour, or randomised <br /> 
+          words which don't look even slightly believable.
+        </p>
       </div>
+
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {data.map((service, index) => (
           <div
@@ -36,13 +40,23 @@ const ServiceSection = async ({}) => {
 
               <Link
                 href={`services/${service._id}`}
-                className="text-blue-500 hover:text-blue-700 text-xl"
+                className="text-orange-600 hover:text-orange-700 text-xl"
               >
                 <FaArrowRight />
               </Link>
             </div>
           </div>
         ))}
+      </div>
+
+      {/* See More Button */}
+      <div className="text-center mt-8">
+        <Link
+          href="/services"
+          className="inline-block  border border-orange-600 text-orange-600 hover:text-white font-semibold px-6 py-3 rounded hover:bg-orange-600 transition-colors"
+        >
+          See More
+        </Link>
       </div>
     </div>
   );
